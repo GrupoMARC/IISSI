@@ -31,7 +31,7 @@
 	if (count($errores)>0) {
 		// Guardo en la sesión los mensajes de error y volvemos al formulario
 		$_SESSION["errores"] = $errores;
-		Header('Location: matriculacion.php');
+		Header('Location: excepcion.php');
 	} else{
 		Header('Location: exito_alta_matricula.php');
 	}

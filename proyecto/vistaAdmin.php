@@ -1,12 +1,4 @@
-session_start();
-require_once ("includes/funciones.php");
-$menuBoton_on = 1;
-$conexion = crearConexionBD();
-if (isset($_SESSION["dato"])) {
-	$dato = $_SESSION["dato"];
-	unset($_SESSION["dato"]);
-}
-?>
+
 <?php
 session_start();
 include_once ("includes/funciones.php");

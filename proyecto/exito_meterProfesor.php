@@ -16,9 +16,12 @@
 		}
 	
 	// ABRIR LA CONEXIÓN A LA BASE DE DATOS
-		$conexion  = crearConexionBD(); 
-		alta_profesor($conexion,$usuario);
-		cerrarConexionBD($conexion);
+		$conexion  = crearConexionBD();
+	//Llama a la funcion para dar de alta a un profesor
+	$profesor="Profesor";
+		// alta_usuarioProf($conexion,$usuario);
+		// alta_profesor($conexion,$usuario);
+		
 
 	
 ?>
@@ -36,8 +39,9 @@
 	
 		 <!--Cabecera-->
 		<?php include ("includes/cabecera.php"); 
-			$profesor="Profesor";
-			if(alta_usuario($conexion,$usuario,$profesor) && alta_profesor($conexion,$usuario) ){
+		
+		 if(alta_usuarioProf($conexion,$usuario) && alta_profesor($conexion,$usuario) ){
+			
 		?>	
 				<div class="contenedor">
 					<div class="col-50 tablet-col-100 movil-col-100">
@@ -47,13 +51,15 @@
 				
 					</div>
 				</div>
-			<?php }else{
+			<?php 
+			} else{
 				echo "El profesor ya existe.";
 			}?>
 		
 
 	</main>
 	<!--Pie-->
+	<?php cerrarConexionBD($conexion); ?>
 	<?php include ("includes/pie.php"); ?>
 </body>
 </html>

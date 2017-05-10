@@ -24,9 +24,9 @@
 	else
 		$formulario = $_SESSION['formulario'];
 			
-	/* Si hay errores de validación, hay que mostrarlos y marcar los campos (El estilo viene dado y ya se explicará)
+	/* Si hay errores de validación, hay que mostrarlos y marcar los campos (El estilo viene dado y ya se explicará)*/
 	if (isset($_SESSION["errores"]))
-		$errores = $_SESSION["errores"];*/
+		$errores = $_SESSION["errores"];
 
 	include ("includes/funciones.php");
 	$menuBoton_on = 1;
@@ -46,7 +46,9 @@
 </head>
 <body>
     <!--Cabecera-->
-	<?php include ("includes/cabecera.php"); ?>
+	<?php include ("includes/cabecera.php"); 
+		$user_agent = $_SERVER['HTTP_USER_AGENT'];
+	?>
     
 
 	
@@ -75,7 +77,11 @@
 				<label for="email">Correo electrónico:</label>
 				<input id="email" name="email" type="text" required/><br>
 				<label for="fecha">Fecha de nacimiento:</label>
-				<input id="fecha" name="fecha" type="date" required/><br>
+				<input id="fecha" name="fecha" type=<?php if(strpos($user_agent, 'Firefox') !== FALSE){
+					echo "text";
+				}else{
+					echo "date";
+				} ?> required/><br>
 				<label for="direccion">Dirección:</label>
 				<input id="direccion" name="direccion" type="text" required/><br>
 				<label for="provincia">Provincia:</label>

@@ -5,6 +5,14 @@ if (!isset($_SESSION["DNI"])) {
 	header("Location:login.php");
 }
 $menuBoton_on = 1;
+$conexion = crearConexionBD();
+$dni=$_SESSION["DNI"];
+$admin = esAdministrador($conexion, $dni);
+
+if($admin["ESADMINISTRADOR"] == 1){
+	header("Location:vistaAdmin.php");
+}
+cerrarConexionBD($conexion);
 
 ?>
 <!DOCTYPE HTML>

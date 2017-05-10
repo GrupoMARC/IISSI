@@ -568,7 +568,7 @@ function alta_alumno($conexion, $usuario) {
 		$fecha = date('d/m/Y', strtotime($usuario['fecha']));
 		$stmt = $conexion -> prepare("INSERT INTO Alumnos (DNI, Nombre, Apellidos, Fecha_Nacimiento, Email) VALUES (:dni, :nombre, :apellidos, :fecha, :email)");
 
-		$stmt -> bindParam(":dni", $usuario['DNI']);
+		$stmt -> bindParam(":dni", $usuario['dni']);
 		$stmt -> bindParam(":nombre", $usuario['nombre']);
 		$stmt -> bindParam(":apellidos", $usuario['apellidos']);
 		$stmt -> bindParam(":fecha", $fecha);
@@ -581,12 +581,30 @@ function alta_alumno($conexion, $usuario) {
 	}
 }
 
-/* Función para dar de alta un usuario.
+/* Función para dar de alta un usuario. Alumno
  ========================================================================== */
 function alta_usuario($conexion, $usuario) {
 	try {
 		$stmt = $conexion -> prepare("INSERT INTO USUARIOS (DNI, PASS, TIPOUSUARIO, ESADMINISTRADOR) VALUES (:dni, :pass, :tipoUsuario, :esAdmin)");
 		$alumno = "Alumno";
+		$esAdmin = "0";
+		$stmt -> bindParam(":dni", $usuario["dni"]);
+		$stmt -> bindParam(":pass", $usuario["pass"]);
+		$stmt -> bindParam(":tipoUsuario", $alumno);
+		$stmt -> bindParam(":esAdmin", $esAdmin);
+		$stmt -> execute();
+		return true;
+	} catch(PDOException $e) {
+		echo $e -> getMessage();
+		return false;
+	}
+}
+/* Función para dar de alta un usuario. Profesor
+ ========================================================================== */
+function alta_usuarioProf($conexion, $usuario) {
+	try {
+		$stmt = $conexion -> prepare("INSERT INTO USUARIOS (DNI, PASS, TIPOUSUARIO, ESADMINISTRADOR) VALUES (:dni, :pass, :tipoUsuario, :esAdmin)");
+		$alumno = "Profesor";
 		$esAdmin = "0";
 		$stmt -> bindParam(":dni", $usuario["DNI"]);
 		$stmt -> bindParam(":pass", $usuario["PASS"]);
@@ -599,7 +617,29 @@ function alta_usuario($conexion, $usuario) {
 		return false;
 	}
 }
-
+/* Función para dar de alta un Profesor.
+ ========================================================================== */
+function alta_profesor($conexion,$usuario) {
+	try{
+		$oiddep=getOIDDespacho($conexion,$usuario['oid_d']);
+		$fecha = date('d/m/Y',strtotime($usuario['fecha']));
+		$stmt = $conexion->prepare("INSERT INTO Profesores (DNI, Nombre, Apellidos, Fecha_Nacimiento, Email,Categoria,OID_D,OID_Dep) VALUES (:dni, :nombre, :apellidos, :fecha, :email,:categoria,:oid_d,oid_dep)");
+		
+		$stmt->bindParam(":dni",$usuario['DNI']);
+		$stmt->bindParam(":nombre",$usuario['nombre']);
+		$stmt->bindParam(":apellidos",$usuario['apellidos']);
+		$stmt->bindParam(":fecha",$fecha);
+		$stmt->bindParam(":email",$usuario['email']);
+		$stmt->bindParam(":categoria",$usuario['categoria']);
+		$stmt->bindParam(":oid_d",$oiddep); //array to string?¿
+		$stmt->bindParam(":oid_dep",$usuario['oid_dep']);
+		$stmt->execute();
+		return true;
+	} catch(PDOException $e){
+		echo $e->getMessage();
+		return false;
+	}
+}
 /* Función para consultar profesores por búsqueda
  ========================================================================== */
 function consultarProfesores($conexion, $busqueda) {
