@@ -1,0 +1,64 @@
+form{
+	width: 50%;
+	height: 50%;
+	
+}
+body{
+	margin-top: 10%;
+	font-family: 'Raleway', sans-serif;
+}
+.mayus{
+	visibility:hidden;
+}
+.pie{
+	list-style-type: none;
+	background-color: white;
+	border: solid;
+	padding:3%;
+	padding-top:1%;
+	text-align: center;
+	
+}
+ul{
+	padding-left:3%;	
+
+}
+li{
+	display: block;
+	padding-left: 1%;
+	padding-right:1%;
+	float: left;
+    text-align: center;
+	
+	
+}
+a{
+	text-decoration: none;
+	color: black;
+}
+a:hover{
+	color: gray;
+}
+#pass{
+	
+}
+#user,#pass{
+	border-radius: 40px;
+	border: solid gray 1px;
+	padding-left:1%;
+	padding-right:1%;
+	padding-top:0.5%;
+	padding-bottom: 0.5%;
+}
+
+#enviar{
+	position:absolute;
+	bottom:30%;
+	right:47.5%;
+}
+.inicio{
+	background:#F4F4F4;
+	width:35%;
+	border-radius:40px;
+	border:solid 1px gray;
+}
